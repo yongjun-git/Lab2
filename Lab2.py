@@ -2,7 +2,7 @@ def display_main_menu():
     print("Enter some numbers separated by commas (e.g. 5, 67, 32)")
 
 def get_user_input():
-    user_input = input()                  # 1. receive
+    user_input = input("Write your number here: ")                  # 1. receive
     str_list = user_input.split(",")      # 2. cut at commas
     num_list = []                         # empty list to fill
     for item in str_list:                 # 3. for each piece...
@@ -19,10 +19,17 @@ def find_min_max(temp_list):
     return [min_temp, max_temp]
 
 def sort_temperature(temp_list):
-    print("sort_temperature")
-
+    return sorted(temp_list)\
+    
 def calc_median_temperature(temp_list):
-    print("calc_median_temperature")
+    sorted_list = sort_temperature(temp_list)   # step 1: sort (reuses your function!)
+    n = len(sorted_list)                         # how many numbers
+    middle = n // 2                              # position of the middle
+
+    if n % 2 == 1:                               # odd count
+        return sorted_list[middle]
+    else:                                        # even count
+        return (sorted_list[middle - 1] + sorted_list[middle]) / 2
 
 def main():
     print("ET0735 (DevOps for AIoT) - Lab 2 - Introduction to Python")
@@ -34,6 +41,9 @@ def main():
 
     min_max = find_min_max(num_list)
     print(f"Min: {min_max[0]}, Max: {min_max[1]}")
+
+    median = calc_median_temperature(num_list)
+    print(f"Median: {median}")
 
 if __name__ == "__main__":
     main()
